@@ -1,12 +1,7 @@
 from pathlib import Path
-
 from data_loader import load_revenue_values
+from analytics import calculate_average
 
-def calculate_average(values: list[float]) -> float:
-    if not values:
-        return 0.0
-
-    return sum(values) / len(values)
 
 def main() -> None:
     file_path = Path("data/revenue.csv")
