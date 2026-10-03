@@ -1,3 +1,7 @@
+from pathlib import Path
+
+from data_loader import load_revenue_values
+
 def calculate_average(values: list[float]) -> float:
     if not values:
         return 0.0
@@ -5,13 +9,8 @@ def calculate_average(values: list[float]) -> float:
     return sum(values) / len(values)
 
 def main() -> None:
-    revenue_values = [
-        1200.50,
-        980.00,
-        1430.75,
-        1100.25,
-        750.25
-    ]
+    file_path = Path("data/revenue.csv")
+    revenue_values = load_revenue_values(file_path)
 
     total_revenue = sum(revenue_values)
     average_revenue = calculate_average(revenue_values)
