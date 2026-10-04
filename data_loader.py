@@ -1,8 +1,10 @@
 import csv
+from datetime import date
 from pathlib import Path
+from models import RevenueRecord
 
-def load_revenue_values(file_path: Path) -> list[float]:
-    revenue_values: list[float] = []
+def load_revenue_records(file_path: Path) -> list[RevenueRecord]:
+    revenue_values: list[RevenueRecord] = []
 
     with file_path.open(mode = "r", encoding = "utf-8", newline = "") as file:
         reader = csv.DictReader(file)
@@ -22,7 +24,13 @@ def load_revenue_values(file_path: Path) -> list[float]:
                 f"Invalid revenue value '{revenue_text}' "
                 f"on CSV ROW {row_number}"
             ) from error
+
+            record = RevenueRecord(
+                record_date = date.fromisoformat(row["date"]),
+                customer = row["customer"],
+                revenue = revenue
+            )
                 
-            revenue_values.append(revenue)
+            revenue_values.append(record)
 
     return revenue_values

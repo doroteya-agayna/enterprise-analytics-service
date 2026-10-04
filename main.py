@@ -1,11 +1,13 @@
 from pathlib import Path
-from data_loader import load_revenue_values
+from data_loader import load_revenue_records
 from analytics import calculate_average
 
 
 def main() -> None:
     file_path = Path("data/revenue.csv")
-    revenue_values = load_revenue_values(file_path)
+    records = load_revenue_records(file_path)
+
+    revenue_values = [record.revenue for record in records]
 
     total_revenue = sum(revenue_values)
     average_revenue = calculate_average(revenue_values)
